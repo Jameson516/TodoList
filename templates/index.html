@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Todo List - Homework 4
+{% endblock %}
+
+{% block body %}
+    <!--Clickable Title back to Home-->
+    <h1 class="mb-2 text-center display-4"><a href="{% url 'index' %}" class="text-decoration-none">TODO-LIST</a></h1>
+
+    <!--Search Bar-->
+    <form action="{% url 'search' %}" method="get">
+        <div class="input-group mb-3 justify-content-center">
+            <input type="text" name="search" class="form-control" placeholder="Search tasks" value="">
+            <button class="btn btn-primary" type="submit" value="search">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+    </form>
+
+    <!--Show Tasks in a Container List-->
+    {% for task in tasks %}
+        <div class="container mb-3 p-3 border shadow rounded-2">
+            <div class="row align-items-center">
+                <div class="col-md-8 text-md-start">
+                    <p class="m-1"><strong>{{ task }}</strong></p>
+                    <p class="m-1"><small>Created: {{ task.created_at }}</small></p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <!--Update and Delete buttons-->
+                    <!--Delete should return to Index-->
+                    <a href="{% url 'update' task.id %}" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{% url 'delete' task.id %}" class="btn btn-outline-danger"><i class="fa-sharp fa-solid fa-xmark"></i></a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <h3>No items found with your search term, or there is no todo added yet.</h3>
+    {% endfor %}
+
+    <!--Add Task Button-->
+    <a href="{% url 'add' %}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Add a new task</a>
+{% endblock %}

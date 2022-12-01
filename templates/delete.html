@@ -1,0 +1,18 @@
+<!--TEST HTML FOR DELETE. DO NOT USE.-->
+<!--TASK SHOULD BE DELETED ON CLICK, WITHOUT OPENING ANOTHER HTML-->
+{% extends "base.html" %}
+
+{% block title %}
+    Delete Task - Homework 4
+{% endblock %}
+
+{% block body %}
+    <form action="{% url 'delete' task.id %}" method="post">
+    {% csrf_token %}
+        <h4>Are you sure that you want to delete "{{ task }}?"</h4>
+        <a href="{% url 'index' %}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Go Back</a>
+        <button type="submit" class="btn btn-success">Yes, I am sure!</button>
+    </form>
+{% endblock %}
+
+<!--THIS IS NOT USED. IGNORE IT.-->
